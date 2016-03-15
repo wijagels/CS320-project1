@@ -31,4 +31,5 @@ predictors
 # Huge files
 traces/
 examples/
-perf.data
+perf.data*
+out.txt

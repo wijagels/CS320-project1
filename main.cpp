@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
     string behavior, line;
     ifstream infile(argv[1]);
     vector<std::pair<unsigned long long, bool> > v;
-    v.reserve(14796021);
+    v.reserve(23532922);
     while(getline(infile, line)) {
         stringstream s(line);
         s >> std::hex >> addr >> behavior;
@@ -51,17 +51,27 @@ int main(int argc, char *argv[]) {
     */
     auto one = std::async(std::launch::async, [&v]{ return AlwaysTaken(v).predict(); });
     auto two = std::async(std::launch::async, [&v]{ return AlwaysNotTaken(v).predict(); });
-    auto three = std::async(std::launch::async, [&v]{ return AlwaysTaken(v).predict(); });
-    auto four = std::async(std::launch::async, [&v]{ return AlwaysNotTaken(v).predict(); });
-    auto five = std::async(std::launch::async, [&v]{ return AlwaysTaken(v).predict(); });
-    auto six = std::async(std::launch::async, [&v]{ return AlwaysNotTaken(v).predict(); });
+    auto three = std::async(std::launch::async, [&v]{ return BimodalSingle(v).predict(); });
+    auto four = std::async(std::launch::async, [&v]{ return BimodalSaturating(v).predict(); });
+    auto five = std::async(std::launch::async, [&v]{ return Gshare(v).predict(); });
+    auto six = std::async(std::launch::async, [&v]{ return Tournament(v).predict(); });
     auto out = one.get();
     auto out2 = two.get();
+    auto out3 = three.get();
+    auto out4 = four.get();
+    auto out5 = five.get();
+    auto out6 = six.get();
     /*
     auto pair = at.predict();
     auto pair2 = ant.predict();
     */
-    cout << out;
-    cout << out2;
+    std::ofstream os;
+    os.open(argv[2]);
+    os << out;
+    os << out2;
+    os << out3;
+    os << out4;
+    os << out5;
+    os << out6;
     return 0;
 }

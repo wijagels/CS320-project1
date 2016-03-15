@@ -4,18 +4,26 @@
 #include "predictor.hpp"
 
 std::string BimodalSingle::predict() {
-    std::vector<std::pair<unsigned long long, unsigned long long> > results;
+    std::vector<respair> results;
     for(int i = 4;i < 12;i++) {
+        if(i == 6) continue; // This makes me angry
         size_t s = int(std::pow(2, i));
-        bool predictor[2];
-        std::fill_n(predictor, 2, true);
+        bool predictor[s];
+        std::fill_n(predictor, s, true);
+        respair pair;
         for(auto e : v) {
+            if(predictor[e.first % s]) {
+                if(e.second)
+                    pair.first++;
+            }
+            else {
+                if(!e.second)
+                    pair.first++;
+            }
+            predictor[e.first % s] = e.second;
+            pair.second++;
         }
+        results.push_back(pair);
     }
-    std::ostringstream oss;
-    for(auto p : results) {
-        oss << p.first << "," << p.second << "; ";
-    }
-    oss << std::endl;
-    return oss.str();
+    return results_to_string(results);
 }
