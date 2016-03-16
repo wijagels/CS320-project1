@@ -1,0 +1,9 @@
+language: cpp
+compiler: g++-4.7
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.7
+    - g++-4.7

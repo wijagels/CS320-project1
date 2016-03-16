@@ -28,13 +28,13 @@ respair Tournament::execute(const size_t s, const int bits) {
         Gshare::gshare(gpredictor, gr, s, mask, ghr, e);
         BimodalSaturating::bimodalsaturating(bpredictor, br, s, e);
         if(gr.first == br.first) {
-            if(e.second == gr.first)
+            if(gr.first)
                 pair.first++;
         }
         else {
-            if(tour[e.first % s] < 2) {
+            if(tour[e.first % s] < 0b10) {
                 // Use Gshare, 00, 01
-                if(gr.first == e.second) {
+                if(gr.first) {
                     // I was correct
                     pair.first++;
                     if(tour[e.first % s] > 0b00)
@@ -48,7 +48,7 @@ respair Tournament::execute(const size_t s, const int bits) {
             }
             else {
                 // Use bimodal, 10, 11
-                if(br.first == e.second) {
+                if(br.first) {
                     // I was correct
                     pair.first++;
                     if(tour[e.first % s] < 0b11)

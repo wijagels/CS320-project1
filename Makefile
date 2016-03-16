@@ -1,5 +1,5 @@
-CC=gcc
-CXX=g++
+#CC=gcc
+#CXX=g++
 CFLAGS=-c -g -Wall -std=c11
 CXXFLAGS=-c -g -O3 -Wall -std=c++11
 LDFLAGS=-pthread
@@ -28,5 +28,17 @@ clean:
 	-rm $(EXECUTABLE) *.o
 
 test: all
+	tar -xf traces.tar.gz
 	$(RUN) ./traces/short_trace1.txt out.txt
 	diff out.txt ./correct_outputs/short_trace1-output.txt
+	$(RUN) ./traces/short_trace2.txt out.txt
+	diff out.txt ./correct_outputs/short_trace1-output.txt
+	$(RUN) ./traces/short_trace3.txt out.txt
+	diff out.txt ./correct_outputs/short_trace1-output.txt
+	# Long
+	$(RUN) ./traces/long_trace1.txt out.txt
+	diff out.txt ./correct_outputs/long_trace1-output.txt
+	$(RUN) ./traces/long_trace2.txt out.txt
+	diff out.txt ./correct_outputs/long_trace2-output.txt
+	$(RUN) ./traces/long_trace3.txt out.txt
+	diff out.txt ./correct_outputs/long_trace3-output.txt
