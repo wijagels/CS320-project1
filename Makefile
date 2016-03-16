@@ -32,9 +32,9 @@ test: all
 	$(RUN) ./traces/short_trace1.txt out.txt
 	diff out.txt ./correct_outputs/short_trace1-output.txt
 	$(RUN) ./traces/short_trace2.txt out.txt
-	diff out.txt ./correct_outputs/short_trace1-output.txt
+	diff out.txt ./correct_outputs/short_trace2-output.txt
 	$(RUN) ./traces/short_trace3.txt out.txt
-	diff out.txt ./correct_outputs/short_trace1-output.txt
+	diff out.txt ./correct_outputs/short_trace3-output.txt
 	# Long
 	$(RUN) ./traces/long_trace1.txt out.txt
 	diff out.txt ./correct_outputs/long_trace1-output.txt
