@@ -1,7 +1,7 @@
 #CC=gcc
 #CXX=g++
 CFLAGS=-c -g -Wall -std=c11
-CXXFLAGS=-c -g -O3 -Wall -std=c++11
+CXXFLAGS=-c -g -O3 -Wall -Wextra -std=c++11
 LDFLAGS=-pthread
 SOURCES=main.cpp always.cpp bimodalsingle.cpp bimodalsaturating.cpp gshare.cpp tournament.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
